@@ -17,7 +17,7 @@ def log msg=""
   puts msg
 end
 
-(0..1000).each do |offset|
+(0..500000).each do |offset|
   url = URL % {
     offset: offset * PAGE_SIZE,
     perPage: PAGE_SIZE,

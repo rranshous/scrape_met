@@ -1,0 +1,5 @@
+downloads open access images from the met collection
+
+to use, run:
+bundle install
+bundle exec ruby dump_to_dir.rb ./output_dir

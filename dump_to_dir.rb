@@ -6,6 +6,7 @@ require 'uri'
 
 URL = "http://www.metmuseum.org/api/collection/collectionlisting?offset=%{offset}&perPage=%{perPage}&showOnly=%{showOnly}&sortBy=%{sortBy}&sortOrder=%{sortOrder}"
 OUT_DIR = ARGV.first
+PAGE_SIZE = 100
 
 if OUT_DIR.nil?
   STDERR.puts "must provide path to download dir"
@@ -16,10 +17,10 @@ def log msg=""
   puts msg
 end
 
-(1..1000).each do |offset|
+(0..1000).each do |offset|
   url = URL % {
-    offset: offset,
-    perPage: 100,
+    offset: offset * PAGE_SIZE,
+    perPage: PAGE_SIZE,
     showOnly: 'openaccess',
     sortBy: 'AccessionNumber',
     sortOrder: 'asc'

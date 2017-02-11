@@ -40,13 +40,19 @@ end
       next
     end
     log "downloading #{original_download_url}"
-    image_data = HTTParty.get(original_download_url).parsed_response
-    log "downloaded #{image_data.length} datas"
-    log "writing to #{image_write_path}"
-    File.write(image_write_path, image_data)
-    log "writing to #{meta_write_path}"
-    File.write(meta_write_path, image_details.to_json)
-    log "done with image"
-    log
+    begin
+      image_data = HTTParty.get(original_download_url).parsed_response
+      log "downloaded #{image_data.length} datas"
+      log "writing to #{image_write_path}"
+      File.write(image_write_path, image_data)
+      log "writing to #{meta_write_path}"
+      File.write(meta_write_path, image_details.to_json)
+      log "done with image"
+      log
+    rescue Exception => ex
+      log "EXCEPTION: #{ex}"
+      log "not downloaded"
+      log
+    end
   end
 end
